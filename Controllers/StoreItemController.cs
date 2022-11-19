@@ -18,7 +18,14 @@ namespace easy_groceries_backend.Controllers
         public async Task<IActionResult> Get()
         {
             var storeItems = await _dbContext.StoreItem.ToListAsync();
-            return Ok(storeItems);
+
+            if (storeItems != null)
+            {
+                return Ok(storeItems);
+            }
+
+            return NotFound();
+        }
         }
     }
 }
