@@ -1,4 +1,5 @@
 ﻿using easy_groceries_backend.Data;
+using easy_groceries_backend.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,15 +10,17 @@ namespace easy_groceries_backend.Controllers
     public class StoreItemController : ControllerBase
     {
         private readonly EasyGroceryContext _dbContext;
-        public StoreItemController(EasyGroceryContext dbContext)
+        private readonly IStoreItemRepository _storeItemRepository;
+        public StoreItemController(EasyGroceryContext dbContext, IStoreItemRepository storeItemRepository)
         {
             _dbContext = dbContext;
+            _storeItemRepository = storeItemRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var storeItems = await _dbContext.StoreItem.ToListAsync();
+            var storeItems = _storeItemRepository.GetStoreItem();
 
             if (storeItems != null)
             {

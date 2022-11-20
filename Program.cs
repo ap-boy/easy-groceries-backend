@@ -1,9 +1,11 @@
 using easy_groceries_backend.Data;
+using easy_groceries_backend.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IStoreItemRepository, StoreItemRepository>();
 builder.Services.AddDbContext<EasyGroceryContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection"));
