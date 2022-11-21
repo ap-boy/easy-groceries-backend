@@ -29,6 +29,5 @@ namespace easy_groceries_backend.Controllers
 
             return NotFound();
         }
-        }
     }
 }
